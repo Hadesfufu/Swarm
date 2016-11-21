@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\utilities">
+      <UniqueIdentifier>{dfdb1ff0-6fff-402b-b06f-065ef77727a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\utilities">
+      <UniqueIdentifier>{85723b5f-3d0d-483d-9bd8-ede489860c19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\debug.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Drawer.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawerStructures.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawingAnimation.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawingAnimationFade.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawingAnimationMovement.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawingAnimationRotation.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawingAnimationScale.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\E_Command.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\E_Manager.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontHolder.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputKey.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputManager.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Log.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotificationManager.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Parameters.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugiconfig.hpp">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugixml.hpp">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\reversableHashTable.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Singleton.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SoundHolder.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureHolder.h">
+      <Filter>Fichiers d%27en-tête\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="constant.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Swarm_child.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\debug.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Drawer.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawingAnimation.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawingAnimationFade.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawingAnimationMovement.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawingAnimationRotation.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawingAnimationScale.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\E_Command.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\E_Manager.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FontHolder.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\InputKey.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\InputManager.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Log.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\NotificationManager.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Parameters.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="pugixml\pugixml.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SoundHolder.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TextureHolder.cpp">
+      <Filter>Fichiers sources\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Swarm_child.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

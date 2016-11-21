@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<map>
+	<input action="close">
+		<default type="0" code="36_1_0_0_0_0" />
+		<defaultJoystick code="" />
+	</input>
+</map>
