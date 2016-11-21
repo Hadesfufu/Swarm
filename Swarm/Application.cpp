@@ -3,10 +3,12 @@
 #include "InputManager.h"
 #include "E_Manager.h"
 #include "NotificationManager.h"
+
 Application::Application()
 {
 	enableWindow();
 	enableNotif();
+	m_Swarm.createChild(12);
 }
 
 
@@ -17,8 +19,8 @@ Application::~Application()
 
 void Application::launch()
 {
+	sf::Event e;
 	while (m_Window.isOpen()){
-		sf::Event e;
 		while (m_Window.pollEvent(e))
 		{
 			try {
@@ -83,4 +85,3 @@ void Application::close()
 {
 	m_Window.close();
 }
-

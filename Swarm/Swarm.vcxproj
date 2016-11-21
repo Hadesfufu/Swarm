@@ -82,6 +82,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Behavior.h" />
+    <ClInclude Include="Behavior_goToCenter.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="include\debug.h" />
     <ClInclude Include="include\Drawer.h" />
@@ -105,10 +107,13 @@
     <ClInclude Include="include\TextureHolder.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
+    <ClInclude Include="Swarm.h" />
     <ClInclude Include="Swarm_child.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="Behavior_goToCenter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
     <ClCompile Include="source\debug.cpp" />
@@ -128,6 +133,7 @@
     <ClCompile Include="source\Parameters.cpp" />
     <ClCompile Include="source\SoundHolder.cpp" />
     <ClCompile Include="source\TextureHolder.cpp" />
+    <ClCompile Include="Swarm.cpp" />
     <ClCompile Include="Swarm_child.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
