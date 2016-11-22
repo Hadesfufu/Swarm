@@ -1,2 +1,14 @@
 
+Debug (N/A):  0 calculation
+Debug (N/A):  1 calculation
+Debug (N/A):  2 calculation
+Debug (N/A):  3 calculation
+Debug (N/A):  4 calculation
+Debug (N/A):  5 calculation
+Debug (N/A):  6 calculation
+Debug (N/A):  7 calculation
+Debug (N/A):  8 calculation
+Debug (N/A):  9 calculation
+Debug (N/A):  10 calculation
+Debug (N/A):  11 calculation
 Info (InputManager):  -------	InputMap loaded		------

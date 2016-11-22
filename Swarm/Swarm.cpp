@@ -20,7 +20,7 @@ Swarm::~Swarm()
 
 void Swarm::createChild()
 {
-	m_childen.emplace_back(new Swarm_child);
+	m_childen.emplace_back(new Swarm_child(this));
 	Drawer::I()->addToLayer(0, m_childen.back());
 }
 
@@ -29,4 +29,10 @@ void Swarm::createChild(int n)
 	for(int i = 0; i < n; ++i){
 		createChild();
     }
+}
+
+void Swarm::goToCenter(){
+	for (auto it = m_childen.begin(); it != m_childen.end(); ++it){
+		(*it)->setBehavior(it);
+	}
 }
