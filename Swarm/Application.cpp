@@ -8,7 +8,8 @@ Application::Application()
 {
 	enableWindow();
 	enableNotif();
-	m_Swarm.createChild(12);
+	m_Swarm.createChild(16);
+	m_Swarm.goToCenter();
 }
 
 

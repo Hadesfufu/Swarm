@@ -7,6 +7,8 @@
 #define BEHAVIOR_GOTOCENTER_H
 #include "Behavior.h"
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Time.hpp>
+
 
 class Swarm_child;
 
@@ -16,7 +18,7 @@ public:
 	Behavior_goToCenter(Swarm_child* child);
 	~Behavior_goToCenter();
 
-	void	update();
+	void	update(const sf::Time&);
 private:
 	void calculate();
 	Swarm_child*				m_child;

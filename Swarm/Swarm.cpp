@@ -33,6 +33,6 @@ void Swarm::createChild(int n)
 
 void Swarm::goToCenter(){
 	for (auto it = m_childen.begin(); it != m_childen.end(); ++it){
-		(*it)->setBehavior(it);
+		(*it)->setBehavior(new Behavior_goToCenter(*it));
 	}
 }

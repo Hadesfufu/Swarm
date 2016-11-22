@@ -14,9 +14,11 @@ Behavior_goToCenter::~Behavior_goToCenter()
 {
 }
 
-void Behavior_goToCenter::update()
+void Behavior_goToCenter::update(const sf::Time& dt)
 {
+	//Log::debug() << m_child->getId() << "a";
 	m_child->moveTo(m_goal);
+	//Log::debug() << m_child->getId() << "b";
 }
 
 void Behavior_goToCenter::calculate()
@@ -27,6 +29,5 @@ void Behavior_goToCenter::calculate()
 	}
 	m_goal.x /= swarm->getChildren().size();
 	m_goal.y /= swarm->getChildren().size();
-	//Log::debug() << m_child->getId() << "calculation";
 }
 

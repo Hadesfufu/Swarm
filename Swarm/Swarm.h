@@ -20,7 +20,7 @@ public:
 	void createChild(int i);
 
 	void goToCenter();
-	
+		
 	const std::vector< Swarm_child* >& getChildren() const { return  m_childen; }
 
 private:
