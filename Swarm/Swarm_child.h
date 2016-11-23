@@ -11,6 +11,7 @@
 #include <random>
 #include <time.h>
 #include <thread>
+#include "PhysBody.h"
 
 #if defined (_MSC_VER)  // Visual studio
 #define thread_local __declspec( thread )
@@ -19,7 +20,7 @@
 #endif
 
 
-class Swarm_child : public sf::Drawable
+class Swarm_child : public sf::Drawable, public PhysBody
 {
 public:
 	Swarm_child(Swarm* swarm);
@@ -33,6 +34,7 @@ public:
 	int				getId() const { return m_id; }
 
 	void			setBehavior(Behavior*);
+	void			setPosition(const sf::Vector2f&);
 	
 	void			stop();
 
@@ -44,23 +46,22 @@ public:
 	float			getNewDistanceFromOtherChild(const sf::Vector2f& newpos, const Swarm_child* child);
 private:
 
-	void update();
+	void			update();
 
-	float getSign(float x){ if (x > 0) return 1.f; else if (x < 0) return -1.f; return 0; }
-	void	clamp(sf::Vector2f& delta);
+	float			getSign(float x){ if (x > 0) return 1.f; else if (x < 0) return -1.f; return 0; }
 
-	sf::Shape*	m_shape;
-	sf::Thread	m_thread_;
+	sf::Shape*		m_shape;
+	sf::Thread		m_thread_;
 
-	sf::Clock	m_clock;
+	sf::Clock		m_clock;
 	
-	Behavior*	m_Behavior;
-	Swarm*		m_swarm_;
+	Behavior*		m_Behavior;
+	Swarm*			m_swarm_;
 	
-	float		m_speed;
-	int			m_id;
+	float			m_speed;
+	int				m_id;
 
-	static int	m_currentId;
+	static int		m_currentId;
 };
 
 

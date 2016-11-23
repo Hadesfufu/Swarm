@@ -53,13 +53,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Swarm\SFML-2.4.0\include;$(SolutionDir)\Swarm\include;$(SolutionDir)\Swarm\pugixml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Swarm\Box2D;$(SolutionDir)\Swarm\SFML-2.4.0\include;$(SolutionDir)\Swarm\include;$(SolutionDir)\Swarm\pugixml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)/Swarm/SFML-2.4.0/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Swarm\Box2D\Build\vs2013\bin\x32\Debug;$(SolutionDir)/Swarm/SFML-2.4.0/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,6 +105,7 @@
     <ClInclude Include="include\Singleton.h" />
     <ClInclude Include="include\SoundHolder.h" />
     <ClInclude Include="include\TextureHolder.h" />
+    <ClInclude Include="PhysBody.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
     <ClInclude Include="Swarm.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="Behavior_goToCenter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysBody.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
     <ClCompile Include="source\debug.cpp" />
     <ClCompile Include="source\Drawer.cpp" />

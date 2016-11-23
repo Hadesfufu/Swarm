@@ -10,6 +10,7 @@
 #include "Parameters.h"
 #include "constant.h"
 #include "Swarm.h"
+#include <Box2D/Dynamics/b2World.h>
 
 class Application : public Singleton<Application>
 {
@@ -21,11 +22,15 @@ private:
 	Application();
 	~Application();
 
+	void setBorders();
+
 	void enableNotif();
 	void enableWindow();
 
-	sf::RenderWindow m_Window;
-	Swarm			 m_Swarm;
+	sf::RenderWindow	m_Window;
+	b2World				m_World;
+	Swarm				m_Swarm;
+	sf::Clock			m_Clock;
 };
 
 

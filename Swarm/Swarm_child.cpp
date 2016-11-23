@@ -4,16 +4,18 @@
 
 int Swarm_child::m_currentId = 0;
 
-Swarm_child::Swarm_child(Swarm* swarm) : m_thread_(&Swarm_child::update, this), m_swarm_(swarm)
+Swarm_child::Swarm_child(Swarm* swarm) : m_thread_(&Swarm_child::update, this), m_swarm_(swarm), PhysBody(b2BodyType::b2_dynamicBody)
 {
 	m_speed = 50;
+	float radius = 10;
 	m_id = m_currentId;
 	m_currentId++;
-	m_shape = new sf::CircleShape(10);
+	m_shape = new sf::CircleShape(radius);
+	setCircleHitbox(radius);
 	m_shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
 	m_shape->setOutlineColor(sf::Color::White);
 	m_shape->setOutlineThickness(1.f);
-	m_shape->setPosition(intRand(0, 1280), intRand(0, 720));
+	setPosition(sf::Vector2f(intRand(0, 1280), intRand(0, 720)));
 	m_thread_.launch();
 }
 
@@ -44,9 +46,13 @@ void Swarm_child::update()
 	while (true)
 	{
 		m_clock.restart();
-		sf::sleep(sf::milliseconds(50));
+		sf::sleep(sf::milliseconds(100));
 		if (m_Behavior)
 			m_Behavior->update(m_clock.getElapsedTime());
+		m_shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
+		m_shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
+		if (getId() == 0)
+			Log::debug() << m_shape->getPosition();
 	}
 }
 
@@ -63,15 +69,8 @@ void Swarm_child::moveTo(const sf::Vector2f& pos)
 	sf::Vector2f actualDelta = pos - currentPos;
 	float ratioX = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
 	float ratioY = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
-	float speed = m_speed*m_clock.getElapsedTime().asSeconds();
-	sf::Vector2f newDelta(ratioX*speed, ratioY*speed);
-	clamp(newDelta);
-	sf::Vector2f newPos = newDelta + currentPos;
-	if (fabs(newDelta.x) > fabs(actualDelta.x))
-		newPos.x = pos.x;
-	if (fabs(newDelta.y) > fabs(actualDelta.y))
-		newPos.y = pos.y;
-	m_shape->setPosition(newPos);
+	sf::Vector2f newDelta(ratioX*m_speed, ratioY*m_speed);
+	setMovement(SFtoB(newDelta));
 }
 
 int Swarm_child::intRand(const int& min, const int& max)
@@ -94,17 +93,8 @@ float Swarm_child::getNewDistanceFromOtherChild(const sf::Vector2f& input, const
 	return std::sqrtf((newPos.x * newPos.x) + (newPos.y * newPos.y));	
 }
 
-
-void Swarm_child::clamp(sf::Vector2f& delta)
+void Swarm_child::setPosition(const sf::Vector2f& vec)
 {
-	sf::Vector2f newpos = getPosition() + delta;
-	for (auto it = m_swarm_->getChildren().begin(); it != m_swarm_->getChildren().end(); ++it){
-		if (*it == this)
-			continue;
-		if (getNewDistanceFromOtherChild(newpos, *it) < 24.f){
-			delta.x = 0;
-			delta.y = 0;
-			return;
-		}
-    }
+	m_shape->setPosition(vec);
+	PhysBody::setPosition(SFtoB(vec));
 }

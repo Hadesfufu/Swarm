@@ -3,9 +3,11 @@
 #include "InputManager.h"
 #include "E_Manager.h"
 #include "NotificationManager.h"
+#include "PhysBody.h"
 
-Application::Application()
+Application::Application() : m_World(b2Vec2(0.0f,0.0f))
 {
+	PhysBody::setWorld(&m_World);
 	enableWindow();
 	enableNotif();
 	m_Swarm.createChild(16);
@@ -22,6 +24,7 @@ void Application::launch()
 {
 	sf::Event e;
 	while (m_Window.isOpen()){
+		m_Clock.restart();
 		while (m_Window.pollEvent(e))
 		{
 			try {
@@ -41,7 +44,7 @@ void Application::launch()
 			if (e.getFunction() != nullptr)
 				e.getFunction()(this);
 		}
-
+		m_World.Step(m_Clock.getElapsedTime().asSeconds(), 8, 3);
 		Drawer::I()->draw();
 	}
 }
@@ -85,4 +88,36 @@ void Application::enableNotif()
 void Application::close()
 {
 	m_Window.close();
+}
+
+void Application::setBorders(){
+	b2Body* m_body;
+	b2EdgeShape shape;
+	b2BodyDef def;
+	def.type = b2_staticBody;
+	sf::Vector2u size = m_Window.getSize();
+
+	//Top
+	def.position = b2Vec2(0, 0);
+	m_body = m_World.CreateBody(&def);
+	shape.Set(b2Vec2(0, 0), b2Vec2((float32)size.x / PhysBody::getBodyScale(), 0));
+	m_body->CreateFixture(&shape, 0.0f);
+
+	//Left
+	def.position = b2Vec2(0, 0);
+	m_body = m_World.CreateBody(&def);
+	shape.Set(b2Vec2(0, 0), b2Vec2(0, (float32)size.y / PhysBody::getBodyScale()));
+	m_body->CreateFixture(&shape, 0.0f);
+
+	//Right
+	def.position = b2Vec2((float32)size.x / PhysBody::getBodyScale(), 0);
+	m_body = m_World.CreateBody(&def);
+	shape.Set(b2Vec2(0, 0), b2Vec2(0, (float32)size.y / PhysBody::getBodyScale()));
+	m_body->CreateFixture(&shape, 0.0f);
+
+	//Bot
+	def.position = b2Vec2(0, (float32)size.y / PhysBody::getBodyScale());
+	m_body = m_World.CreateBody(&def);
+	shape.Set(b2Vec2(0, 0), b2Vec2((float32)size.x / PhysBody::getBodyScale(), 0));
+	m_body->CreateFixture(&shape, 0.0f);
 }
