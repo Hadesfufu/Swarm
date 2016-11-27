@@ -339,7 +339,7 @@ void PhysBody::setCircleHitbox(float radius)
 		m_body->DestroyFixture(currentFixture);	
 	}
 	b2CircleShape shape;
-	shape.m_radius = radius;
+	shape.m_radius = radius/c_BodyScale;
 	fixturedef.shape = &shape;
 	m_body->CreateFixture(&fixturedef);
 	

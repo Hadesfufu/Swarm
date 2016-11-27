@@ -36,24 +36,20 @@ public:
 	void			setBehavior(Behavior*);
 	void			setPosition(const sf::Vector2f&);
 	
-	void			stop();
-
 	void			moveTo(const sf::Vector2f& pos);
 
 	int				intRand(const int & min, const int & max);
 
 	float			getDistanceFromOtherChild(const Swarm_child* child);
 	float			getNewDistanceFromOtherChild(const sf::Vector2f& newpos, const Swarm_child* child);
+
+	void			update(sf::Time& dt);
 private:
 
-	void			update();
 
 	float			getSign(float x){ if (x > 0) return 1.f; else if (x < 0) return -1.f; return 0; }
 
 	sf::Shape*		m_shape;
-	sf::Thread		m_thread_;
-
-	sf::Clock		m_clock;
 	
 	Behavior*		m_Behavior;
 	Swarm*			m_swarm_;

@@ -31,6 +31,7 @@ private:
 	b2World				m_World;
 	Swarm				m_Swarm;
 	sf::Clock			m_Clock;
+	sf::Time			m_Time;
 };
 
 

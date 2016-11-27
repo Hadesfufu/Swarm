@@ -20,7 +20,9 @@ public:
 	void createChild(int i);
 
 	void goToCenter();
-		
+	
+	void update(sf::Time& dt);
+	
 	const std::vector< Swarm_child* >& getChildren() const { return  m_childen; }
 
 private:

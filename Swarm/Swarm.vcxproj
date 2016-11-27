@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="Behavior_FastCircle.h" />
     <ClInclude Include="Behavior_goToCenter.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="include\debug.h" />
@@ -114,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="Behavior_FastCircle.cpp" />
     <ClCompile Include="Behavior_goToCenter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysBody.cpp" />

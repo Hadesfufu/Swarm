@@ -36,3 +36,10 @@ void Swarm::goToCenter(){
 		(*it)->setBehavior(new Behavior_goToCenter(*it));
 	}
 }
+
+void Swarm::update(sf::Time& dt)
+{
+	for (auto it = m_childen.begin(); it != m_childen.end(); ++it){
+		(*it)->update(dt);
+    }
+}

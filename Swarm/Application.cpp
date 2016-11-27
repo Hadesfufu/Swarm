@@ -10,7 +10,7 @@ Application::Application() : m_World(b2Vec2(0.0f,0.0f))
 	PhysBody::setWorld(&m_World);
 	enableWindow();
 	enableNotif();
-	m_Swarm.createChild(16);
+	m_Swarm.createChild(20);
 	m_Swarm.goToCenter();
 }
 
@@ -24,6 +24,7 @@ void Application::launch()
 {
 	sf::Event e;
 	while (m_Window.isOpen()){
+		m_Time = m_Clock.getElapsedTime();
 		m_Clock.restart();
 		while (m_Window.pollEvent(e))
 		{
@@ -44,7 +45,8 @@ void Application::launch()
 			if (e.getFunction() != nullptr)
 				e.getFunction()(this);
 		}
-		m_World.Step(m_Clock.getElapsedTime().asSeconds(), 8, 3);
+		m_Swarm.update(m_Time);
+		m_World.Step(m_Time.asSeconds(), 8, 3);
 		Drawer::I()->draw();
 	}
 }

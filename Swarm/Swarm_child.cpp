@@ -4,25 +4,23 @@
 
 int Swarm_child::m_currentId = 0;
 
-Swarm_child::Swarm_child(Swarm* swarm) : m_thread_(&Swarm_child::update, this), m_swarm_(swarm), PhysBody(b2BodyType::b2_dynamicBody)
+Swarm_child::Swarm_child(Swarm* swarm) :  m_swarm_(swarm), PhysBody(b2BodyType::b2_dynamicBody)
 {
-	m_speed = 50;
+	m_speed = 5;
 	float radius = 10;
 	m_id = m_currentId;
 	m_currentId++;
 	m_shape = new sf::CircleShape(radius);
-	setCircleHitbox(radius);
+	setCircleHitbox(radius+1.f);
 	m_shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
 	m_shape->setOutlineColor(sf::Color::White);
 	m_shape->setOutlineThickness(1.f);
 	setPosition(sf::Vector2f(intRand(0, 1280), intRand(0, 720)));
-	m_thread_.launch();
 }
 
 
 Swarm_child::~Swarm_child()
 {
-	stop();
 	if (m_shape)
 		delete m_shape;
 	if (m_Behavior)
@@ -41,24 +39,15 @@ void Swarm_child::setBehavior(Behavior* bea)
 	m_Behavior = bea;
 }
 
-void Swarm_child::update()
+void Swarm_child::update(sf::Time&dt)
 {
-	while (true)
+	if (m_Behavior)
+		m_Behavior->update(dt);
+	m_shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
+	m_shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
+	if (getId() == 0)
 	{
-		m_clock.restart();
-		sf::sleep(sf::milliseconds(100));
-		if (m_Behavior)
-			m_Behavior->update(m_clock.getElapsedTime());
-		m_shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
-		m_shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
-		if (getId() == 0)
-			Log::debug() << m_shape->getPosition();
 	}
-}
-
-void Swarm_child::stop()
-{
-	m_thread_.terminate();
 }
 
 void Swarm_child::moveTo(const sf::Vector2f& pos)
@@ -67,10 +56,17 @@ void Swarm_child::moveTo(const sf::Vector2f& pos)
 	if (currentPos == pos)
 		return;
 	sf::Vector2f actualDelta = pos - currentPos;
-	float ratioX = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
-	float ratioY = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
+	float ratioX, ratioY;
+	ratioX = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
+	ratioY = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
+
 	sf::Vector2f newDelta(ratioX*m_speed, ratioY*m_speed);
-	setMovement(SFtoB(newDelta));
+	if (fabs(actualDelta.x) < fabs(newDelta.x))
+		newDelta.x = actualDelta.x;
+	if (fabs(actualDelta.y) < fabs(newDelta.y))
+		newDelta.y = actualDelta.y;
+	newDelta -= BtoSF<float>(PhysBody::getSpeed());
+	applyImpulse(SFtoB(newDelta));
 }
 
 int Swarm_child::intRand(const int& min, const int& max)
