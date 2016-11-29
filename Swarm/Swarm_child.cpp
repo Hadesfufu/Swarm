@@ -82,6 +82,10 @@ float Swarm_child::getDistanceFromOtherChild(const Swarm_child* child)
 	sf::Vector2f newPos = getPosition() - child->getPosition();
 	return std::sqrtf((newPos.x * newPos.x) + (newPos.y * newPos.y));
 }
+float Swarm_child::getDistanceFromPoint(const sf::Vector2f& vec){
+	sf::Vector2f newPos = getPosition() - vec;
+	return std::sqrtf((newPos.x * newPos.x) + (newPos.y * newPos.y));
+}
 
 float Swarm_child::getNewDistanceFromOtherChild(const sf::Vector2f& input, const Swarm_child* child)
 {

@@ -29,5 +29,6 @@ void Behavior_goToCenter::calculate()
 	}
 	m_goal.x /= swarm->getChildren().size();
 	m_goal.y /= swarm->getChildren().size();
+
 }
 

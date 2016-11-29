@@ -19,7 +19,8 @@ public:
 private:
 	void calculate();
 	Swarm_child*				m_child;
-	sf::Vector2f				m_goal;
+	sf::Vector2f				m_center;
+	float						m_radius;
 };
 
 #endif

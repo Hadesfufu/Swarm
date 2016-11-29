@@ -20,7 +20,7 @@ Swarm::~Swarm()
 
 void Swarm::createChild()
 {
-	m_childen.emplace_back(new Swarm_child(this));
+	m_childen.emplace_back(this);
 	Drawer::I()->addToLayer(0, m_childen.back());
 }
 

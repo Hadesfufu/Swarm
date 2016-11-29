@@ -41,6 +41,7 @@ public:
 	int				intRand(const int & min, const int & max);
 
 	float			getDistanceFromOtherChild(const Swarm_child* child);
+	float			getDistanceFromPoint(const sf::Vector2f& vec);
 	float			getNewDistanceFromOtherChild(const sf::Vector2f& newpos, const Swarm_child* child);
 
 	void			update(sf::Time& dt);
