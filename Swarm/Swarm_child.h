@@ -32,8 +32,10 @@ public:
 	sf::Color		getColor() const { return m_shape->getFillColor(); }
 	const Swarm*	getSwarm() const { return m_swarm_; }
 	int				getId() const { return m_id; }
-
+	const Behavior* getBehavior() { return m_Behavior; }
+		
 	void			setBehavior(Behavior*);
+
 	void			setPosition(const sf::Vector2f&);
 	
 	void			moveTo(const sf::Vector2f& pos);
@@ -53,6 +55,7 @@ private:
 	sf::Shape*		m_shape;
 	
 	Behavior*		m_Behavior;
+	type_info		m_BehaviorType;
 	Swarm*			m_swarm_;
 	
 	float			m_speed;

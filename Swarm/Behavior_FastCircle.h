@@ -17,7 +17,7 @@ public:
 
 	void	update(const sf::Time&);
 private:
-	void calculate();
+	void	calculate();
 	Swarm_child*				m_child;
 	sf::Vector2f				m_center;
 	float						m_radius;
