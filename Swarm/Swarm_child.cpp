@@ -4,6 +4,16 @@
 
 int Swarm_child::m_CurrentId = 0;
 
+const sf::Vector2f& Min(const sf::Vector2f& a, const sf::Vector2f& b)
+{
+	float da = sqrt((a.x * a.x) + (a.y * a.y));
+	float db = sqrt((b.x * b.x) + (b.y * b.y));
+	if (da < db)
+		return a;
+	else
+		return b;
+}
+
 Swarm_child::Swarm_child(Swarm* swarm) : m_Swarm(swarm), PhysBody(b2BodyType::b2_dynamicBody){
 	m_Speed = 5;
 	float radius = 10;
@@ -48,11 +58,9 @@ void Swarm_child::moveTo(const sf::Vector2f& pos)
 	if (currentPos == pos)
 		return;
 	sf::Vector2f actualDelta = pos - currentPos;
-	float ratioX, ratioY;
-	ratioX = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
-	ratioY = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
+	sf::Vector2f ratio = getRatio(pos);
 
-	sf::Vector2f newDelta(ratioX*m_Speed, ratioY*m_Speed);
+	sf::Vector2f newDelta(ratio.x*m_Speed, ratio.y*m_Speed);
 	if (fabs(actualDelta.x) < fabs(newDelta.x))
 		newDelta.x = actualDelta.x;
 	if (fabs(actualDelta.y) < fabs(newDelta.y))
@@ -60,6 +68,32 @@ void Swarm_child::moveTo(const sf::Vector2f& pos)
 	newDelta -= BtoSF<float>(PhysBody::getSpeed());
 	applyImpulse(SFtoB(newDelta));
 }
+
+void Swarm_child::moveAway(const sf::Vector2f& pos, float maxspeed)
+{
+	sf::Vector2f currentPos = getPosition();
+	if (currentPos == pos)
+		return;
+	sf::Vector2f actualDelta = pos - currentPos;
+	sf::Vector2f ratio = getRatio(pos);
+	sf::Vector2f newDelta;
+	float speed = std::fmin(maxspeed, m_Speed);
+	newDelta.x = ratio.x*speed;
+	newDelta.y = ratio.y*speed;
+	newDelta = -newDelta;
+	newDelta -= BtoSF<float>(PhysBody::getSpeed());
+	applyImpulse(SFtoB(newDelta));
+}
+
+
+void Swarm_child::moveDir(const sf::Vector2f& ratio)
+{
+	sf::Vector2f currentPos = getPosition();
+	sf::Vector2f newDelta(ratio.x*m_Speed, ratio.y*m_Speed);
+	newDelta -= BtoSF<float>(PhysBody::getSpeed());
+	applyImpulse(SFtoB(newDelta));
+}
+
 
 int Swarm_child::intRand(const int& min, const int& max)
 {
@@ -103,4 +137,29 @@ void Swarm_child::setBehavior(Behavior* be)
 	else
 		Log::error("SwarmChild::SetBehavior") << "Bad Behavior";
 }
- 
+
+sf::Vector2f Swarm_child::getRatio(const sf::Vector2f& goal)
+{
+	sf::Vector2f actualDelta = goal - getPosition();
+	sf::Vector2f ratio;
+	ratio.x = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
+	ratio.y = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
+	return ratio;
+}
+
+Swarm_child* Swarm_child::getNearestChild(Swarm_child* child)
+{
+	sf::Vector2f	dist(100000.f, 100000.f), newone;
+	Swarm_child* buffer = nullptr;
+	for (auto it = m_Swarm->getChildren().begin(); it != m_Swarm->getChildren().end(); ++it)
+	{	
+		if (*it != child && *it != this ){
+			newone = Min(dist, (*it)->getPosition() - getPosition());
+			if (dist != newone){
+				dist = newone;
+				buffer = *it;
+			}
+		}
+	}
+	return buffer;
+}

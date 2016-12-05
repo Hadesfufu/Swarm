@@ -40,14 +40,21 @@ public:
 	void			setPosition(const sf::Vector2f&);
 	
 	void			moveTo(const sf::Vector2f& pos);
+	void			moveDir(const sf::Vector2f& ratio);
+	void			moveAway(const sf::Vector2f& pos, float speed = -1.f);
 
 	int				intRand(const int & min, const int & max);
 
 	float			getDistanceFromOtherChild(const Swarm_child* child);
 	float			getDistanceFromPoint(const sf::Vector2f& vec);
 	float			getNewDistanceFromOtherChild(const sf::Vector2f& newpos, const Swarm_child* child);
+	sf::Vector2f	getRatio(const sf::Vector2f& goal);
+
+	// param = different from child
+	Swarm_child*	getNearestChild(Swarm_child* child = nullptr);
 
 	void			update(sf::Time& dt);
+
 private:
 
 

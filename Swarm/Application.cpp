@@ -5,13 +5,17 @@
 #include "NotificationManager.h"
 #include "PhysBody.h"
 
-Application::Application() : m_World(b2Vec2(0.0f,0.0f))
+Application::Application() : m_World(b2Vec2(0.0f, 0.0f)), m_launched(false)
 {
 	PhysBody::setWorld(&m_World);
+	std::srand(0);
 	enableWindow();
 	enableNotif();
+	setBorders();
 	m_Swarm.createChild(20);
-	m_Swarm.goToCenter();
+	//m_Swarm.goToCenter();
+	m_Swarm.doACircle();
+	//m_Swarm.doALine();
 }
 
 
@@ -45,8 +49,10 @@ void Application::launch()
 			if (e.getFunction() != nullptr)
 				e.getFunction()(this);
 		}
-		m_Swarm.update(m_Time);
-		m_World.Step(m_Time.asSeconds(), 8, 3);
+		if (m_launched){
+			m_Swarm.update(m_Time);
+			m_World.Step(m_Time.asSeconds(), 8, 3);
+		}
 		Drawer::I()->draw();
 	}
 }
@@ -85,6 +91,8 @@ void Application::enableNotif()
 {
 	NotificationManager::I()->AddObserver(NOTIFICATION_NAME_CLOSING_EVENT, this, &Application::close);
 	NotificationManager::I()->AddObserver("close", this, &Application::close);
+	NotificationManager::I()->AddObserver("pause", this, &Application::togglePause);
+//	NotificationManager::I()->AddObserver("add", this, &Application::addBubule);
 }
 
 void Application::close()

@@ -4,4 +4,8 @@
 		<default type="0" code="36_1_0_0_0_0" />
 		<defaultJoystick code="" />
 	</input>
+	<input action="pause">
+		<default type="0" code="15_1_0_0_0_0" />
+		<defaultJoystick code="" />
+	</input>
 </map>

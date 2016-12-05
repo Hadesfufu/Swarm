@@ -1,26 +1,24 @@
 ////////////////////////////////////////////////////////////
-// < Fichier : "Behavior_FastCircle.h"> 
+// < Fichier : "Behavior_FastLine.h"> 
 // < Author : Yohan "HadesFufu" Masson >
 ////////////////////////////////////////////////////////////
 
-#ifndef BEHAVIOR_FASTCIRCLE_H
-#define Behavior_FastCircle_H
+#ifndef BEHAVIOR_FASTLINE
+#define BEHAVIOR_FASTLINE
 #include "Behavior.h"
 #include "Swarm_child.h"
-class Behavior_FastCircle :
-	public Behavior
+
+class Behavior_FastLine : public Behavior
 {
 public:
-	Behavior_FastCircle(Swarm_child* child);
-	~Behavior_FastCircle();
+	Behavior_FastLine(Swarm_child* child);
+	~Behavior_FastLine();
 
 	void	update(const sf::Time&);
 private:
 	void	calculate();
 	Swarm_child*				m_child;
-	sf::Vector2f				m_center;
-	sf::Vector2f				m_nearestPointToGo;
-	float						m_radius;
+	float						m_latitude;
 };
-
 #endif
+

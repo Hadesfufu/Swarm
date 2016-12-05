@@ -17,9 +17,12 @@ public:
 	~Swarm();
 
 	void createChild();
+	void createChild(sf::Vector2f& vec);
 	void createChild(int i);
 
 	void goToCenter();
+	void doACircle();
+	void doALine();
 	
 	void update(sf::Time& dt);
 	
