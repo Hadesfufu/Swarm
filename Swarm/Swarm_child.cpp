@@ -2,49 +2,41 @@
 #include <ctime>
 #include "Log.h"
 
-int Swarm_child::m_currentId = 0;
+int Swarm_child::m_CurrentId = 0;
 
-Swarm_child::Swarm_child(Swarm* swarm) :  m_swarm_(swarm), PhysBody(b2BodyType::b2_dynamicBody)
-{
-	m_speed = 5;
+Swarm_child::Swarm_child(Swarm* swarm) : m_Swarm(swarm), PhysBody(b2BodyType::b2_dynamicBody){
+	m_Speed = 5;
 	float radius = 10;
-	m_id = m_currentId;
-	m_currentId++;
-	m_shape = new sf::CircleShape(radius);
+	m_Id = m_CurrentId;
+	m_CurrentId++;
+	m_Shape = new sf::CircleShape(radius);
 	setCircleHitbox(radius+1.f);
-	m_shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
-	m_shape->setOutlineColor(sf::Color::White);
-	m_shape->setOutlineThickness(1.f);
+	m_Shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
+	m_Shape->setOutlineColor(sf::Color::White);
+	m_Shape->setOutlineThickness(1.f);
 	setPosition(sf::Vector2f(intRand(0, 1280), intRand(0, 720)));
 }
 
 
 Swarm_child::~Swarm_child()
 {
-	if (m_shape)
-		delete m_shape;
+	if (m_Shape)
+		delete m_Shape;
 	if (m_Behavior)
 		delete m_Behavior;
 }
 
 void Swarm_child::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(*m_shape);
-}
-
-void Swarm_child::setBehavior(Behavior* bea)
-{
-	if (m_Behavior)
-		delete m_Behavior;
-	m_Behavior = bea;
+	target.draw(*m_Shape);
 }
 
 void Swarm_child::update(sf::Time&dt)
 {
 	if (m_Behavior)
 		m_Behavior->update(dt);
-	m_shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
-	m_shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
+	m_Shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
+	m_Shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
 	if (getId() == 0)
 	{
 	}
@@ -60,7 +52,7 @@ void Swarm_child::moveTo(const sf::Vector2f& pos)
 	ratioX = actualDelta.x / (fabs(actualDelta.y) + fabs(actualDelta.x));
 	ratioY = actualDelta.y / (fabs(actualDelta.y) + fabs(actualDelta.x));
 
-	sf::Vector2f newDelta(ratioX*m_speed, ratioY*m_speed);
+	sf::Vector2f newDelta(ratioX*m_Speed, ratioY*m_Speed);
 	if (fabs(actualDelta.x) < fabs(newDelta.x))
 		newDelta.x = actualDelta.x;
 	if (fabs(actualDelta.y) < fabs(newDelta.y))
@@ -95,6 +87,20 @@ float Swarm_child::getNewDistanceFromOtherChild(const sf::Vector2f& input, const
 
 void Swarm_child::setPosition(const sf::Vector2f& vec)
 {
-	m_shape->setPosition(vec);
+	m_Shape->setPosition(vec);
 	PhysBody::setPosition(SFtoB(vec));
 }
+
+void Swarm_child::setBehavior(Behavior* be)
+{
+	if (be)
+	{
+		if (m_Behavior)
+			delete m_Behavior;
+		else
+			m_Behavior = be;
+	}
+	else
+		Log::error("SwarmChild::SetBehavior") << "Bad Behavior";
+}
+ 

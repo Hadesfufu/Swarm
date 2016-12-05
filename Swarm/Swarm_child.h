@@ -28,12 +28,13 @@ public:
 
 	virtual void	draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	sf::Vector2f	getPosition() const { return m_shape->getPosition(); }
-	sf::Color		getColor() const { return m_shape->getFillColor(); }
-	const Swarm*	getSwarm() const { return m_swarm_; }
-	int				getId() const { return m_id; }
+	sf::Vector2f	getPosition() const { return m_Shape->getPosition(); }
+	sf::Color		getColor() const { return m_Shape->getFillColor(); }
+	const Swarm*	getSwarm() const { return m_Swarm; }
+	int				getId() const { return m_Id; }
 	const Behavior* getBehavior() { return m_Behavior; }
-		
+
+//	void			setBehavior_GoToCenter();
 	void			setBehavior(Behavior*);
 
 	void			setPosition(const sf::Vector2f&);
@@ -52,16 +53,15 @@ private:
 
 	float			getSign(float x){ if (x > 0) return 1.f; else if (x < 0) return -1.f; return 0; }
 
-	sf::Shape*		m_shape;
+	sf::Shape*		m_Shape;
 	
 	Behavior*		m_Behavior;
-	type_info		m_BehaviorType;
-	Swarm*			m_swarm_;
+	Swarm*			m_Swarm;
 	
-	float			m_speed;
-	int				m_id;
+	float			m_Speed;
+	int				m_Id;
 
-	static int		m_currentId;
+	static int		m_CurrentId;
 };
 
 
