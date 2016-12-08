@@ -8,8 +8,6 @@
 #include <vector>
 #include "Behavior_goToCenter.h"
 
-class Swarn_child;
-
 class Swarm
 {
 public:
@@ -27,7 +25,10 @@ public:
 	void update(sf::Time& dt);
 	
 	const std::vector< Swarm_child* >& getChildren() const { return  m_childen; }
+	const Swarm_child* getChildAtPosition(const sf::Vector2f& pos) const;
 
+	void  deleteChildAt(const sf::Vector2f& pos) const;
+	void  addChildAt(const sf::Vector2f& pos);
 private:
 	
 	std::vector< Swarm_child* > m_childen;

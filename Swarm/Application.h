@@ -22,8 +22,8 @@ public:
 	sf::Vector2u		getWindowSize() const { return m_Window.getSize(); }
 
 	void togglePause()	{ m_launched = !m_launched; }
-	void addBubule(sf::Vector2f pos) { m_Swarm.createChild(pos); }
-	void removeBubule(sf::Vector2f pos);
+	void addBubule();
+	void removeBubule();
 private:
 	Application();
 	~Application();

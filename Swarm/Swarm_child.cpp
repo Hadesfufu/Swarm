@@ -16,11 +16,11 @@ const sf::Vector2f& Min(const sf::Vector2f& a, const sf::Vector2f& b)
 
 Swarm_child::Swarm_child(Swarm* swarm) : m_Swarm(swarm), PhysBody(b2BodyType::b2_dynamicBody){
 	m_Speed = 5;
-	float radius = 10;
+	m_Radius = 10;
 	m_Id = m_CurrentId;
 	m_CurrentId++;
-	m_Shape = new sf::CircleShape(radius);
-	setCircleHitbox(radius+1.f);
+	m_Shape = new sf::CircleShape(m_Radius);
+	setCircleHitbox(m_Radius + 1.f);
 	m_Shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
 	m_Shape->setOutlineColor(sf::Color::White);
 	m_Shape->setOutlineThickness(1.f);

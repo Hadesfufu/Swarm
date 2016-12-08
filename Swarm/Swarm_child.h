@@ -33,6 +33,7 @@ public:
 	const Swarm*	getSwarm() const { return m_Swarm; }
 	int				getId() const { return m_Id; }
 	const Behavior* getBehavior() { return m_Behavior; }
+	float			getRadius() { return m_Radius; }
 
 //	void			setBehavior_GoToCenter();
 	void			setBehavior(Behavior*);
@@ -66,6 +67,7 @@ private:
 	Swarm*			m_Swarm;
 	
 	float			m_Speed;
+	float			m_Radius;
 	int				m_Id;
 
 	static int		m_CurrentId;

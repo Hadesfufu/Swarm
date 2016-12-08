@@ -8,4 +8,12 @@
 		<default type="0" code="15_1_0_0_0_0" />
 		<defaultJoystick code="" />
 	</input>
+	<input action="add">
+		<default type="1" code="0_1" />
+		<defaultJoystick code="" />
+	</input>
+	<input action="remove">
+		<default type="1" code="0_2" />
+		<defaultJoystick code="" />
+	</input>
 </map>

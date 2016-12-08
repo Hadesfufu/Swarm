@@ -66,3 +66,26 @@ void Swarm::update(sf::Time& dt)
 		(*it)->update(dt);
     }
 }
+
+const Swarm_child* Swarm::getChildAtPosition(const sf::Vector2f& pos) const
+{
+	for (auto it = m_childen.begin(); it != m_childen.end(); ++it)
+	{
+		if ((*it)->getDistanceFromPoint(pos) < (*it)->getRadius())
+		{
+			return (*it);
+		}
+	}
+}
+
+void Swarm::deleteChildAt(const sf::Vector2f& pos) const
+{
+	for (auto it = m_childen.begin(); it != m_childen.end(); ++it)
+	{
+		if ((*it)->getDistanceFromPoint(pos) < (*it)->getRadius())
+		{
+			delete *it;
+			return;
+		}
+	}
+}

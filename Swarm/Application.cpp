@@ -92,7 +92,8 @@ void Application::enableNotif()
 	NotificationManager::I()->AddObserver(NOTIFICATION_NAME_CLOSING_EVENT, this, &Application::close);
 	NotificationManager::I()->AddObserver("close", this, &Application::close);
 	NotificationManager::I()->AddObserver("pause", this, &Application::togglePause);
-//	NotificationManager::I()->AddObserver("add", this, &Application::addBubule);
+	NotificationManager::I()->AddObserver("add", this, &Application::addBubule);
+	NotificationManager::I()->AddObserver("remove", this, &Application::removeBubule);
 }
 
 void Application::close()
@@ -130,4 +131,17 @@ void Application::setBorders(){
 	m_body = m_World.CreateBody(&def);
 	shape.Set(b2Vec2(0, 0), b2Vec2((float32)size.x / PhysBody::getBodyScale(), 0));
 	m_body->CreateFixture(&shape, 0.0f);
+}
+
+void Application::addBubule()
+{
+	sf::Vector2f mousePos = (sf::Vector2f)Input::Manager::I()->getMousePos();
+	m_Swarm.createChild(mousePos);
+
+}
+
+void Application::removeBubule()
+{
+	sf::Vector2f mousePos = (sf::Vector2f)Input::Manager::I()->getMousePos();
+	m_Swarm.deleteChildAt(mousePos);
 }
