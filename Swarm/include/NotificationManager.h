@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 //	created by Vassili "Bakasama" Rezvoy
 //	02/04/2016
-//	project zeraventure
+//	project Swarm
 ///////////////////////////////////////////////
 
 #ifndef NOTIFICATION_MANAGER_H_INCLUDED

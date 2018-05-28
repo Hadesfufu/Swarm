@@ -22,8 +22,6 @@ Swarm_child::Swarm_child(Swarm* swarm) : m_Swarm(swarm), PhysBody(b2BodyType::b2
 	m_Shape = new sf::CircleShape(m_Radius);
 	setCircleHitbox(m_Radius + 1.f);
 	m_Shape->setFillColor(sf::Color(intRand(0, 256), intRand(0, 256), intRand(0, 256)));
-	m_Shape->setOutlineColor(sf::Color::White);
-	m_Shape->setOutlineThickness(1.f);
 	setPosition(sf::Vector2f(intRand(0, 1280), intRand(0, 720)));
 }
 
@@ -41,15 +39,12 @@ void Swarm_child::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(*m_Shape);
 }
 
-void Swarm_child::update(sf::Time&dt)
+void Swarm_child::update(sf::Time& dt)
 {
 	if (m_Behavior)
 		m_Behavior->update(dt);
 	m_Shape->setPosition(BtoSF<float>(PhysBody::getPositionB2()));
 	m_Shape->setRotation(PhysBody::getAngle() * 180 / b2_pi);
-	if (getId() == 0)
-	{
-	}
 }
 
 void Swarm_child::moveTo(const sf::Vector2f& pos)
@@ -131,8 +126,8 @@ void Swarm_child::setBehavior(Behavior* be)
 	{
 		if (m_Behavior)
 			delete m_Behavior;
-		else
-			m_Behavior = be;
+
+		m_Behavior = be;
 	}
 	else
 		Log::error("SwarmChild::SetBehavior") << "Bad Behavior";

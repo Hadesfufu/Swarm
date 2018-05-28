@@ -1,11 +1,10 @@
 #include "Application.h"
 #include "Drawer.h"
 #include "InputManager.h"
-#include "E_Manager.h"
 #include "NotificationManager.h"
 #include "PhysBody.h"
 
-Application::Application() : m_World(b2Vec2(0.0f, 0.0f)), m_launched(false)
+Application::Application() : m_World(b2Vec2(0.0f, 0.0f)), m_launched(true)
 {
 	PhysBody::setWorld(&m_World);
 	std::srand(0);
@@ -13,8 +12,8 @@ Application::Application() : m_World(b2Vec2(0.0f, 0.0f)), m_launched(false)
 	enableNotif();
 	setBorders();
 	m_Swarm.createChild(20);
-	//m_Swarm.goToCenter();
-	m_Swarm.doACircle();
+	m_Swarm.goToCenter();
+	//m_Swarm.doACircle();
 	//m_Swarm.doALine();
 }
 
@@ -30,29 +29,19 @@ void Application::launch()
 	while (m_Window.isOpen()){
 		m_Time = m_Clock.getElapsedTime();
 		m_Clock.restart();
+
 		while (m_Window.pollEvent(e))
 		{
-			try {
-				Input::Manager::I()->handelInputEvent(e);
-			}
-			catch (E_Base<Application>& e) {
-				if (e.getFunction() != nullptr)
-					e.getFunction()(this);
-			}
+			Input::Manager::I()->handelInputEvent(e);
 		}
+		
+		Input::Manager::I()->notifyClickingAction();
 
-		try {
-			Input::Manager::I()->notifyClickingAction();
-
-		}
-		catch (E_Base<Application>& e) {
-			if (e.getFunction() != nullptr)
-				e.getFunction()(this);
-		}
 		if (m_launched){
 			m_Swarm.update(m_Time);
 			m_World.Step(m_Time.asSeconds(), 8, 3);
 		}
+
 		Drawer::I()->draw();
 	}
 }
@@ -65,18 +54,18 @@ void Application::enableWindow()
 	if (windowMode == Constant::SELECTOR_WINDOWMODE_WINDOWED){
 		int width = Parameters::I()->getVec2I("WindowSize")->x;
 		int height = Parameters::I()->getVec2I("WindowSize")->y;
-		m_Window.create(sf::VideoMode(width, height), "Zeraventure");
+		m_Window.create(sf::VideoMode(width, height), "Swarm");
 	}
 	else if (windowMode == Constant::SELECTOR_WINDOWMODE_FULLSCREEN){
-		m_Window.create(sf::VideoMode().getDesktopMode(), "Zeraventure", sf::Style::Fullscreen);
+		m_Window.create(sf::VideoMode().getDesktopMode(), "Swarm", sf::Style::Fullscreen);
 	}
 	else if (windowMode == Constant::SELECTOR_WINDOWMODE_BORDERLESS){
 		int width = Parameters::I()->getVec2I("WindowSize")->x;
 		int height = Parameters::I()->getVec2I("WindowSize")->y;
-		m_Window.create(sf::VideoMode(width, height), "Zeraventure", sf::Style::None);
+		m_Window.create(sf::VideoMode(width, height), "Swarm", sf::Style::None);
 	}
 	else{
-		m_Window.create(sf::VideoMode().getDesktopMode(), "Zeraventure", sf::Style::None);
+		m_Window.create(sf::VideoMode().getDesktopMode(), "Swarm", sf::Style::None);
 	}
 	m_Window.setFramerateLimit(*Parameters::I()->getInt("FrameRate"));
 	m_Window.setVerticalSyncEnabled(*Parameters::I()->getBool("VerticalSync"));

@@ -15,7 +15,7 @@ Drawer::~Drawer()
 void Drawer::draw(){
 	updateAnims();
 	//updateParallax();
-	m_Window->clear(sf::Color::Black);
+	m_Window->clear(sf::Color::White);
 	for (auto it = m_Layers.begin(); it != m_Layers.end() && !it->second.hidden; ++it){
 		for (auto it2 = it->second.drawables.begin(); it2 != it->second.drawables.end(); ++it2){
 			if (!it2->drawable)
@@ -107,7 +107,6 @@ void Drawer::showElement(const sf::Drawable* elem){
 			if (it2->drawable == elem){
 				DrawerStructures::Drawable& drawable = *it2;
 				drawable.hidden = false;
-				//Log::debug() << "Element Showing successfull";
 			}
 		}
 	}

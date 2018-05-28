@@ -1,7 +1,6 @@
 #include "PhysBody.h"
 #include <limits>
 #include <queue>
-#include <Box2D.h>
 
 b2World*			PhysBody::c_World;
 const float32		PhysBody::c_BodyScale= 30.f;

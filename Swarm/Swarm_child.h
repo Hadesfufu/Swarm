@@ -35,9 +35,7 @@ public:
 	const Behavior* getBehavior() { return m_Behavior; }
 	float			getRadius() { return m_Radius; }
 
-//	void			setBehavior_GoToCenter();
 	void			setBehavior(Behavior*);
-
 	void			setPosition(const sf::Vector2f&);
 	
 	void			moveTo(const sf::Vector2f& pos);
